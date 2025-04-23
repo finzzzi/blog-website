@@ -2,6 +2,8 @@ import Link from 'next/link';
 import { Post } from '@/types/blog';
 
 export default function BlogCard({ post }: { post: Post }) {
+  const previewText = post.content.substring(0, 100) + (post.content.length > 100 ? '...' : '');
+
   return (
     <div className="border rounded-lg overflow-hidden shadow hover:shadow-lg transition-shadow">
       {post.featuredImage && (
@@ -24,10 +26,10 @@ export default function BlogCard({ post }: { post: Post }) {
             {post.title}
           </h3>
         </Link>
-        <p className="text-gray-600 mb-4">{post.excerpt}</p>
+        <p className="text-gray-600 mb-4">{previewText}</p>
         <div className="flex justify-between items-center">
-          <span className="text-sm text-gray-500">
-            {new Date(post.publishedAt).toLocaleDateString()}
+        <span className="text-sm text-gray-500">
+            {new Date(post.created).toLocaleDateString()}
           </span>
           <Link
             href={`/blog/${post.slug}`}

@@ -7,8 +7,8 @@ export async function getRecentPosts(): Promise<Post[]> {
   try {
     const response = await axios.get(`${API_BASE}/data/Posts`, {
       params: {
-        sortBy: "publishedAt DESC",
-        pageSize: "3"
+        sortBy: 'created DESC',
+        pageSize: '3'
       }
     });
     return response.data;
@@ -22,13 +22,14 @@ export async function getCategories(): Promise<string[]> {
   try {
     const response = await axios.get(`${API_BASE}/data/Posts`, {
       params: {
-        properties: "category",
-        distinct: "category"
+        property: '`category`',
+        distinct: true
       }
     });
-    return response.data || [];
+    return response.data.map((item: { category: string }) => item.category) || [];
   } catch (error) {
     console.error("Error fetching categories:", error);
     return [];
   }
 }
+
