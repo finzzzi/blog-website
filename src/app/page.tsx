@@ -1,5 +1,3 @@
-
-
 import { getRecentPosts, getCategories } from '@/lib/api';
 import BlogCard from '@/components/BlogCard';
 
