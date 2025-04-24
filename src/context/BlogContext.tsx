@@ -36,7 +36,11 @@ const blogReducer = (state: BlogState, action: BlogAction): BlogState => {
         isLoading: false,
       };
     case 'FETCH_POSTS_FAILURE':
-      return { ...state, isLoading: false, error: action.payload };
+        return { 
+          ...state, 
+          isLoading: false, 
+          error: typeof action.payload === 'string' ? action.payload : 'An unknown error occurred' 
+        };
     case 'SET_SEARCH_QUERY':
       return { ...state, searchQuery: action.payload };
     case 'SET_SELECTED_CATEGORY':
@@ -83,7 +87,8 @@ export const BlogProvider: React.FC<{ children: React.ReactNode }> = ({ children
         const posts = await fetchPosts();
         dispatch({ type: 'FETCH_POSTS_SUCCESS', payload: posts });
       } catch (error) {
-        dispatch({ type: 'FETCH_POSTS_FAILURE', payload: error.message });
+        const errorMessage = error instanceof Error ? error.message : 'Failed to fetch posts';
+        dispatch({ type: 'FETCH_POSTS_FAILURE', payload: errorMessage });
       }
     };
 
