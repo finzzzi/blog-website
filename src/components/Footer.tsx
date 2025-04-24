@@ -46,11 +46,6 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/categories" className="text-gray-300 hover:text-white hover:underline">
-                  Categories
-                </Link>
-              </li>
-              <li>
                 <Link href="/about" className="text-gray-300 hover:text-white hover:underline">
                   About
                 </Link>
@@ -68,7 +63,7 @@ export default function Footer() {
               <input
                 type="email"
                 placeholder="Your email"
-                className="px-4 py-2 w-full rounded-l focus:outline-none text-gray-800"
+                className="px-4 py-2 w-full rounded-l focus:outline-none text-white"
                 required
               />
               <button
