@@ -33,3 +33,26 @@ export async function getCategories(): Promise<string[]> {
   }
 }
 
+export const fetchPosts = async (): Promise<Post[]> => {
+  try {
+    const response = await axios.get(`${API_BASE}/data/Posts`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+    throw error;
+  }
+};
+
+export const fetchPostBySlug = async (slug: string): Promise<Post> => {
+  try {
+    const response = await axios.get(`${API_BASE}/data/Posts`, {
+      params: {
+        where: `slug='${slug}'`
+      }
+    });
+    return response.data[0];
+  } catch (error) {
+    console.error('Error fetching post by slug:', error);
+    throw error;
+  }
+};
